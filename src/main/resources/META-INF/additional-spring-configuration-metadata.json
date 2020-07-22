@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.thymeleaf",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf."
+  }
+] }
