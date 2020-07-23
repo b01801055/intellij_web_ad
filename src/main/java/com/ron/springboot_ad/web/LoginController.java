@@ -2,11 +2,11 @@ package com.ron.springboot_ad.web;
 
 import com.ron.springboot_ad.domain.User;
 import com.ron.springboot_ad.domain.UserRepository;
+import com.ron.springboot_ad.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -25,16 +25,14 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username,
-                               @RequestParam String password,
-                               @RequestParam String email,
-                               @RequestParam Integer phone) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setPhone(phone);
+//    public String register(@RequestParam String username,
+//                           @RequestParam String password,
+//                           @RequestParam String email,
+//                           @RequestParam Integer phone) {
+    public String register(UserForm userForm) {
+        User user = userForm.convertToUser();
         userRepository.save(user);
         return "redirect:/login";
     }
+
 }
