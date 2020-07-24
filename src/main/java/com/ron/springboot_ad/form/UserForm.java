@@ -10,13 +10,14 @@ import javax.validation.constraints.Pattern;
 
 public class UserForm {
 
+    public static final String PHONE_REG="^09\\d{8}$";
+
     @NotBlank
     private String username;
-    @NotBlank
-    @Length(min = 6)
+    @Length(min = 6,message = "密碼至少需要6位")
     private String password;
-    @Pattern(regexp = "")
-    private  int phone;
+    @Pattern(regexp = PHONE_REG,message = "請輸入正確手機號碼")
+    private  String phone;
     @Email
     private String email;
     @NotBlank
@@ -41,11 +42,11 @@ public class UserForm {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -63,6 +64,13 @@ public class UserForm {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public boolean confirmPassword() {
+        if (this.password.equals(this.confirmPassword)) {
+            return true;
+        }
+        return false;
     }
 
     public User convertToUser() {
